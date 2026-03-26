@@ -173,15 +173,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
       <div class="field" id="fBoPhan"><label>Bộ phận</label>
         <div class="sel-wrap"><select id="boPhan">
           <option value="">-- Chọn --</option>
-          <option>HCNS</option><option>Kế hoạch</option><option>IT</option>
-          <option>Kế toán</option><option>Đóng gói</option><option>Mài</option>
-          <option>Hoàn thiện</option><option>Tạo hình</option><option>Khác</option>
-          <option>Gốm mộc</option><option>Gốm phối liệu</option><option>Khác</option>
-          <option>Vật tư</option><option>Bảo Vệ</option><option>Khác</option>
-          <option>QC</option><option>Tạp vụ</option><option>Khác</option>
-          <option>Bảo trì</option><option>Kho TP</option><option>Khác</option>
-          <option>Khuôn</option><option>Thí nghiệm</option><option>Khác</option>
-          <option>Phụ trách Xưởng</option>
+          <option>Sản Xuất</option><option>Kho Vận</option><option>Kỹ Thuật</option>
+          <option>Kiểm Phẩm</option><option>Hành Chính</option><option>Kế Toán</option>
+          <option>Kinh Doanh</option><option>Bảo Vệ</option><option>Khác</option>
         </select></div>
       </div>
     </div>
@@ -440,7 +434,7 @@ function renderTongKet(){
 
 // ================================================================
 function taiMenu(){
-  if(!SHEET_URL||SHEET_URL==="https://script.google.com/macros/s/AKfycbzYg1E8ON4wINPC5rROiyAdLElB1cL-WHType-bSHtGzpxZQ6WjIynxTKh52_vTQ9A/exec") return;
+  if(!SHEET_URL||SHEET_URL==="DAN_URL_O_DAY") return;
   const t2k = dk(ngayArr[0]);
   const s = document.createElement("script");
   s.src = SHEET_URL+"?action=getMenuTuan&t2="+t2k+"&callback=nhanMenu";
@@ -452,7 +446,7 @@ function nhanMenu(data){
 }
 
 // ================================================================
-function guiDangKy(){
+async function guiDangKy(){
   const maNV  = document.getElementById("maNV").value.trim();
   const hoTen = document.getElementById("hoTen").value.trim();
   const boPhan= document.getElementById("boPhan").value;
