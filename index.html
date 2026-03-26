@@ -440,7 +440,7 @@ function renderTongKet(){
 
 // ================================================================
 function taiMenu(){
-  if(!SHEET_URL||SHEET_URL==="DAN_URL_O_DAY") return;
+  if(!SHEET_URL||SHEET_URL==="https://script.google.com/macros/s/AKfycbzYg1E8ON4wINPC5rROiyAdLElB1cL-WHType-bSHtGzpxZQ6WjIynxTKh52_vTQ9A/exec") return;
   const t2k = dk(ngayArr[0]);
   const s = document.createElement("script");
   s.src = SHEET_URL+"?action=getMenuTuan&t2="+t2k+"&callback=nhanMenu";
