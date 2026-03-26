@@ -6,42 +6,36 @@
 <title>Đăng Ký Suất Ăn Tuần</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-:root {
-  --red:#d63031; --red2:#b71c1c; --green:#27ae60; --green2:#1b5e20;
-  --orange:#e67e22; --blue:#2980b9; --bg:#f0f2f5;
-  --white:#fff; --text:#1a1a2e; --sub:#6c757d;
-  --border:#dde1e7; --radius:14px; --shadow:0 4px 20px rgba(0,0,0,0.08);
+:root{
+  --red:#d63031;--red2:#b71c1c;--green:#27ae60;--green2:#1b5e20;
+  --orange:#e67e22;--blue:#2980b9;--bg:#f0f2f5;
+  --white:#fff;--text:#1a1a2e;--sub:#6c757d;
+  --border:#dde1e7;--radius:14px;--shadow:0 4px 20px rgba(0,0,0,0.08);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;padding-bottom:40px;}
 
-/* HEADER */
 .hdr{background:linear-gradient(135deg,#d63031,#b71c1c);padding:20px 16px 50px;text-align:center;position:relative;overflow:hidden;}
-.hdr::before,.hdr::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,0.06);}
-.hdr::before{width:220px;height:220px;top:-60px;right:-40px;}
-.hdr::after{width:160px;height:160px;bottom:-80px;left:-30px;}
+.hdr::before{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,0.06);width:220px;height:220px;top:-60px;right:-40px;}
+.hdr::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,0.05);width:160px;height:160px;bottom:-80px;left:-30px;}
 .hdr-icon{font-size:44px;animation:bob 2.5s ease-in-out infinite;}
 @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
 .hdr h1{color:#fff;font-size:21px;font-weight:900;margin-top:8px;}
 .hdr p{color:rgba(255,255,255,0.75);font-size:13px;margin-top:4px;}
 
-/* TUẦN INFO */
 .week-bar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 16px;margin-top:-22px;position:relative;z-index:2;margin-bottom:14px;}
-.wchip{background:#fff;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:700;box-shadow:0 3px 12px rgba(0,0,0,0.1);color:var(--text);}
+.wchip{background:#fff;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:700;box-shadow:0 3px 12px rgba(0,0,0,0.1);}
 .wchip.deadline{color:var(--red);}
 .wchip.tuan{color:var(--blue);}
 
-.wrap{max-width:540px;margin:0 auto;padding:0 14px;}
+.wrap{max-width:520px;margin:0 auto;padding:0 14px;}
 
-/* CARD */
 .card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:12px;animation:up .4s ease both;}
 @keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-.card:nth-child(2){animation-delay:.05s;}.card:nth-child(3){animation-delay:.1s;}.card:nth-child(4){animation-delay:.15s;}
 
 .sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--sub);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* FIELDS */
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .field{margin-bottom:10px;}
 .field label{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--sub);margin-bottom:5px;}
@@ -51,74 +45,85 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
 .sel-wrap{position:relative;}
 .sel-wrap::after{content:'▾';position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sub);pointer-events:none;}
 
-/* NGÀY TRONG TUẦN */
+/* TABS NGÀY */
 .ngay-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none;}
 .ngay-tabs::-webkit-scrollbar{display:none;}
-.ngay-tab{flex-shrink:0;padding:8px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;background:#fff;color:var(--sub);}
+.ngay-tab{flex-shrink:0;padding:8px 12px;border-radius:8px;border:2px solid var(--border);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;background:#fff;color:var(--sub);text-align:center;min-width:48px;}
 .ngay-tab:hover{border-color:#ccc;color:var(--text);}
 .ngay-tab.active{border-color:var(--red);background:var(--red);color:#fff;}
 .ngay-tab.done{border-color:var(--green);background:var(--green);color:#fff;}
-.ngay-tab.skip{border-color:#ccc;background:#f5f5f5;color:#bbb;}
-
-/* CA ĂN */
-.ca-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.ca-btn{border:2px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);}
-.ca-btn:hover{border-color:#ccc;background:#fff;}
-.ca-btn.sel-trua{border-color:var(--green);background:#edf7ef;}
-.ca-btn.sel-chieu{border-color:var(--orange);background:#fef5ec;}
-.ca-btn .icon{font-size:20px;margin-bottom:3px;}
-.ca-btn .name{font-size:13px;font-weight:800;color:var(--text);}
-.ca-btn .time{font-size:11px;color:var(--sub);}
-
-/* MON AN */
-.mon-section{margin-bottom:12px;}
-.mon-label{font-size:12px;font-weight:800;color:var(--text);margin-bottom:7px;display:flex;align-items:center;gap:6px;}
-.mon-label .badge{background:var(--red);color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;}
-.mon-grid{display:flex;flex-direction:column;gap:6px;}
-.mon-item{border:2px solid var(--border);border-radius:9px;padding:10px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px;background:var(--bg);}
-.mon-item:hover{border-color:#ccc;background:#fff;transform:translateX(2px);}
-.mon-item.sel{border-color:var(--red);background:#fef0f0;}
-.mon-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
-.mon-item.sel .mon-dot{border-color:var(--red);background:var(--red);}
-.mon-dot::after{content:'';width:6px;height:6px;background:#fff;border-radius:50%;opacity:0;}
-.mon-item.sel .mon-dot::after{opacity:1;}
-.mon-ten{font-size:13px;font-weight:700;color:var(--text);}
-.mon-chip{font-size:10px;background:#e8f4fd;color:#1a6fa8;border-radius:4px;padding:1px 6px;margin-left:auto;font-weight:700;white-space:nowrap;}
-
-/* NGHỈ TOGGLE */
-.nghi-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff8f8;border:2px solid #ffcdd2;border-radius:10px;margin-bottom:12px;}
-.nghi-label{font-size:13px;font-weight:700;color:#c62828;}
-.toggle{width:44px;height:24px;background:#ccc;border-radius:12px;cursor:pointer;transition:background .2s;position:relative;}
-.toggle.on{background:#c62828;}
-.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
-.toggle.on::after{left:22px;}
-
-/* TRÁNG MIỆNG */
-.trangmieng{background:#fffbf0;border:1px solid #ffe082;border-radius:9px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.trangmieng .icon{font-size:20px;}
-.trangmieng .txt{font-size:13px;font-weight:700;color:#795548;}
-.trangmieng .sub{font-size:11px;color:#a1887f;margin-top:1px;}
+.ngay-tab.nghi-tab{border-color:#bbb;background:#f5f5f5;color:#999;}
 
 /* PROGRESS */
-.progress-wrap{margin-bottom:12px;}
-.progress-label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--sub);margin-bottom:6px;}
-.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange));border-radius:3px;transition:width .4s ease;}
+.prog-wrap{margin-bottom:14px;}
+.prog-label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--sub);margin-bottom:5px;}
+.prog-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange));border-radius:3px;transition:width .4s;}
+
+/* TOGGLE */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;margin-bottom:12px;border:2px solid;}
+.toggle-row.nghi-style{background:#fff8f8;border-color:#ffcdd2;}
+.toggle-row.ca-style-trua{background:#f1f8f1;border-color:#c8e6c9;}
+.toggle-row.ca-style-chieu{background:#fff8f0;border-color:#ffe0b2;}
+.toggle-lbl{font-size:13px;font-weight:800;}
+.toggle-lbl.red{color:#c62828;}
+.toggle-lbl.green{color:#2d7a3a;}
+.toggle-lbl.orange{color:#e67e22;}
+.tog{width:44px;height:24px;background:#ccc;border-radius:12px;cursor:pointer;transition:background .2s;position:relative;flex-shrink:0;}
+.tog.on-red{background:#c62828;}
+.tog.on-green{background:#27ae60;}
+.tog.on-orange{background:#e67e22;}
+.tog::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+.tog.on-red::after,.tog.on-green::after,.tog.on-orange::after{left:22px;}
+
+/* CHỌN MÓN MẶN */
+.mon-section{padding:10px 12px;background:var(--bg);border-radius:9px;margin-top:8px;}
+.mon-section-lbl{font-size:12px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.mon-grid{display:flex;flex-direction:column;gap:6px;}
+.mon-item{border:2px solid var(--border);border-radius:9px;padding:10px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px;background:#fff;}
+.mon-item:hover{border-color:#bbb;transform:translateX(2px);}
+.mon-item.sel-trua{border-color:var(--green);background:#edf7ef;}
+.mon-item.sel-chieu{border-color:var(--orange);background:#fef5ec;}
+.mon-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.mon-item.sel-trua .mon-dot{border-color:var(--green);background:var(--green);}
+.mon-item.sel-chieu .mon-dot{border-color:var(--orange);background:var(--orange);}
+.mon-dot::after{content:'';width:6px;height:6px;background:#fff;border-radius:50%;opacity:0;}
+.mon-item.sel-trua .mon-dot::after,.mon-item.sel-chieu .mon-dot::after{opacity:1;}
+.mon-ten{font-size:13px;font-weight:700;color:var(--text);}
+
+/* MẶC ĐỊNH INFO */
+.default-info{background:#fffbf0;border:1px solid #ffe082;border-radius:9px;padding:10px 12px;margin-top:8px;}
+.default-info-title{font-size:11px;font-weight:800;color:#795548;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
+.default-item{font-size:12px;color:#6d4c41;display:flex;align-items:center;gap:6px;margin-bottom:3px;}
+
+/* TỔNG KẾT */
+.tongket{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:12px;}
+.tk-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:12px;}
+.tk-day{margin-bottom:8px;padding:10px;background:var(--bg);border-radius:9px;}
+.tk-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.tk-name{font-size:13px;font-weight:800;color:var(--text);}
+.tk-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:700;}
+.badge-ok{background:#edf7ef;color:var(--green2);}
+.badge-partial{background:#e3f2fd;color:#1565c0;}
+.badge-none{background:#f5f5f5;color:#999;}
+.badge-nghi{background:#ffebee;color:#c62828;}
+.tk-detail{font-size:12px;color:var(--sub);line-height:1.7;}
 
 /* BUTTONS */
 .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-.btn{padding:13px;border:none;border-radius:10px;font-size:14px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn{padding:12px;border:none;border-radius:10px;font-size:14px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;}
 .btn-prev{background:var(--bg);border:2px solid var(--border);color:var(--sub);}
-.btn-prev:hover{border-color:#aaa;color:var(--text);}
+.btn-prev:hover:not(:disabled){border-color:#aaa;color:var(--text);}
+.btn-prev:disabled{opacity:.35;}
 .btn-next{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;box-shadow:0 4px 12px rgba(214,48,49,0.3);}
-.btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(214,48,49,0.35);}
+.btn-next:hover:not(:disabled){transform:translateY(-1px);}
+.btn-next:disabled{opacity:.35;}
 .btn-submit{width:100%;padding:15px;border:none;border-radius:12px;font-size:16px;font-weight:900;font-family:'Nunito',sans-serif;cursor:pointer;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;box-shadow:0 4px 16px rgba(39,174,96,0.35);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(39,174,96,0.4);}
 .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;}
 .spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:inline-block;}
 @keyframes sp{to{transform:rotate(360deg);}}
 
-/* RESULT */
 .result{display:none;border-radius:var(--radius);padding:22px;text-align:center;margin-bottom:12px;animation:up .3s ease;}
 .result.ok{background:#edf7ef;border:2px solid var(--green);}
 .result.err{background:#ffebee;border:2px solid #e53935;}
@@ -127,21 +132,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
 .result-detail{font-size:13px;color:var(--sub);line-height:1.6;white-space:pre-line;}
 .btn-reset{margin-top:12px;padding:8px 20px;border:2px solid var(--red);border-radius:8px;background:transparent;color:var(--red);font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .2s;}
 .btn-reset:hover{background:var(--red);color:#fff;}
-
-/* TONG KET */
-.tongket{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:12px;}
-.tongket-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:12px;}
-.tongket-day{margin-bottom:10px;padding:10px;background:var(--bg);border-radius:9px;}
-.td-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.td-name{font-size:13px;font-weight:800;color:var(--text);}
-.td-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:700;}
-.badge-ok{background:#edf7ef;color:var(--green2);}
-.badge-skip{background:#fef5ec;color:#e67e22;}
-.badge-nghi{background:#ffebee;color:#c62828;}
-.td-detail{font-size:12px;color:var(--sub);line-height:1.7;}
-
 .footer{text-align:center;padding:16px 0 0;color:var(--sub);font-size:12px;}
-
 @media(max-width:380px){.frow{grid-template-columns:1fr;}.btn-row{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -150,26 +141,25 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
 <div class="hdr">
   <div class="hdr-icon">🍱</div>
   <h1>Đăng Ký Suất Ăn Tuần</h1>
-  <p>Đăng ký trước Thứ 6, 16:00 cho tuần sau</p>
+  <p>Chọn món mặn cho từng ca · Deadline: Thứ 6, 16:00</p>
 </div>
 
 <div class="week-bar">
-  <div class="wchip tuan" id="chipTuan">📅 Tuần --/-- → --/--</div>
-  <div class="wchip deadline" id="chipDeadline">⏰ Còn -- ngày</div>
+  <div class="wchip tuan" id="chipTuan">📅 Đang tải...</div>
+  <div class="wchip deadline" id="chipDeadline">⏰ ...</div>
 </div>
 
 <div class="wrap">
 
-  <!-- KẾT QUẢ -->
   <div class="result" id="result">
     <div class="result-icon" id="rIcon"></div>
     <div class="result-title" id="rTitle"></div>
     <div class="result-detail" id="rDetail"></div>
-    <button class="btn-reset" onclick="resetAll()">🔄 Đăng ký lại</button>
+    <button class="btn-reset" onclick="location.reload()">🔄 Đăng ký lại</button>
   </div>
 
-  <!-- BƯỚC 1: THÔNG TIN -->
-  <div class="card" id="cardInfo">
+  <!-- THÔNG TIN NV -->
+  <div class="card">
     <div class="sec-title">1 · Thông tin nhân viên</div>
     <div class="frow">
       <div class="field" id="fMaNV"><label>Mã nhân viên</label><input id="maNV" placeholder="VD: NV001" maxlength="20" autocomplete="off"/></div>
@@ -185,69 +175,51 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
     <div class="field" id="fHoTen"><label>Họ và tên</label><input id="hoTen" placeholder="Nhập họ và tên đầy đủ" maxlength="60" autocomplete="name"/></div>
   </div>
 
-  <!-- BƯỚC 2: ĐĂNG KÝ TỪNG NGÀY -->
+  <!-- ĐĂNG KÝ TỪNG NGÀY -->
   <div class="card">
-    <div class="sec-title">2 · Đăng ký từng ngày trong tuần</div>
-
-    <!-- PROGRESS -->
-    <div class="progress-wrap">
-      <div class="progress-label">
-        <span>Tiến độ đăng ký</span>
-        <span id="progressTxt">0/7 ngày</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="sec-title">2 · Chọn món mặn từng ngày</div>
+    <div class="prog-wrap">
+      <div class="prog-label"><span>Tiến độ</span><span id="progTxt">0/7 ngày</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
     </div>
-
-    <!-- TABS NGÀY -->
     <div class="ngay-tabs" id="ngayTabs"></div>
-
-    <!-- NỘI DUNG TỪNG NGÀY -->
     <div id="ngayContent"></div>
-
-    <!-- NÚT CHUYỂN NGÀY -->
-    <div class="btn-row">
-      <button class="btn btn-prev" id="btnPrev" onclick="chuyenNgay(-1)">← Ngày trước</button>
-      <button class="btn btn-next" id="btnNext" onclick="chuyenNgay(1)">Ngày sau →</button>
+    <div class="btn-row" style="margin-top:12px;">
+      <button class="btn btn-prev" id="btnPrev" onclick="chuyenNgay(-1)">← Trước</button>
+      <button class="btn btn-next" id="btnNext" onclick="chuyenNgay(1)">Sau →</button>
     </div>
   </div>
 
   <!-- TỔNG KẾT -->
-  <div class="tongket" id="tongket">
-    <div class="tongket-title">📋 Tổng kết đăng ký tuần</div>
-    <div id="tongketList"></div>
+  <div class="tongket">
+    <div class="tk-title">📋 Tổng kết cả tuần</div>
+    <div id="tkList"></div>
   </div>
 
-  <!-- NÚT GỬI -->
   <button class="btn-submit" id="btnSubmit" onclick="guiDangKy()">
     ✅ Xác Nhận Đăng Ký Cả Tuần
   </button>
 
-  <div class="footer">Hệ thống đăng ký suất ăn · Deadline: Thứ 6, 16:00</div>
+  <div class="footer">Hệ thống đăng ký suất ăn · Nhà Ăn Công Ty</div>
 </div>
 
 <script>
-// ================================================================
-// ⚙️ CẤU HÌNH
-// ================================================================
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxrgMfnpelos0qy1vmQXeDVJBYqwN2AVXNEIW4T6JOCE2LsQjRymwmNLNsaYmznY0B7/exec";
 
-const NGAY_NAMES = ["Chủ Nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
-const NGAY_SHORT = ["CN","T2","T3","T4","T5","T6","T7"];
-const THU_ORDER  = [1,2,3,4,5,6,0]; // T2→CN
+const THU_TEN   = ["Chủ Nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
+const THU_SHORT = ["CN","T2","T3","T4","T5","T6","T7"];
 
-// Cấu trúc món mặc định (admin sẽ cập nhật từ Sheet)
-// Format: { man1, man2, xao, canh } cho mỗi ca mỗi ngày
-let menuTuan = {}; // Sẽ load từ Apps Script
+// Menu mặc định (sẽ được ghi đè bởi dữ liệu từ Sheet)
+let menuTuan = {};
+const MENU_MAU = {
+  trua: { man: ["Sườn chiên giòn","Gà kho gừng"], xao:"Rau muống xào tỏi", canh:"Canh chua cá" },
+  chieu:{ man: ["Cá kho tộ","Thịt bò xào"],    xao:"Đậu que xào tỏi",  canh:"Canh rau ngót" }
+};
 
-// ================================================================
-// STATE
-// ================================================================
-let ngayHienTai = 0; // index 0-6 (T2=0 ... CN=6)
-let dangKyData  = {}; // { "2024-12-23": { trua: {...}, chieu: {...}, nghi: false } }
-let ngayTuanSau = []; // mảng 7 Date objects
+let ngayIdx = 0;
+let state   = {}; // { "yyyy-mm-dd": { nghi:bool, trua:{man,chon}, chieu:{man,chon} } }
+let ngayArr = []; // 7 Date objects T2→CN tuần sau
 
-// ================================================================
-// KHỞI TẠO
 // ================================================================
 window.onload = () => {
   tinhTuanSau();
@@ -259,377 +231,266 @@ window.onload = () => {
 
 function tinhTuanSau() {
   const now = new Date();
-  // Tìm Thứ 2 tuần sau
-  const thu = now.getDay(); // 0=CN, 1=T2...
-  const soNgayDenT2TuanSau = thu === 0 ? 1 : (8 - thu);
-  const t2TuanSau = new Date(now);
-  t2TuanSau.setDate(now.getDate() + soNgayDenT2TuanSau);
-  t2TuanSau.setHours(0,0,0,0);
-
-  ngayTuanSau = [];
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(t2TuanSau);
-    d.setDate(t2TuanSau.getDate() + i);
-    ngayTuanSau.push(d);
-    // Khởi tạo state rỗng
-    const key = dateKey(d);
-    if (!dangKyData[key]) {
-      dangKyData[key] = {
-        trua:  { man: "", xao: "", canh: "", chon: false },
-        chieu: { man: "", xao: "", canh: "", chon: false },
-        nghi: false
-      };
-    }
+  const thu = now.getDay();
+  const diff = thu === 0 ? 1 : (8 - thu);
+  const t2 = new Date(now);
+  t2.setDate(now.getDate() + diff);
+  t2.setHours(0,0,0,0);
+  ngayArr = [];
+  for (let i=0;i<7;i++) {
+    const d = new Date(t2);
+    d.setDate(t2.getDate()+i);
+    ngayArr.push(d);
+    const k = dk(d);
+    if (!state[k]) state[k] = { nghi:false, trua:{man:"",chon:false}, chieu:{man:"",chon:false} };
   }
 }
 
-function dateKey(d) {
-  return d.toISOString().slice(0,10);
-}
-
-function formatNgay(d) {
-  return d.toLocaleDateString("vi-VN", { day:"2-digit", month:"2-digit" });
-}
+function dk(d){ return d.toISOString().slice(0,10); }
+function fmt(d){ return d.toLocaleDateString("vi-VN",{day:"2-digit",month:"2-digit"}); }
 
 function capNhatChip() {
-  const t2 = ngayTuanSau[0], cn = ngayTuanSau[6];
-  document.getElementById("chipTuan").textContent =
-    `📅 Tuần ${formatNgay(t2)} → ${formatNgay(cn)}`;
-
+  document.getElementById("chipTuan").textContent = `📅 Tuần ${fmt(ngayArr[0])} → ${fmt(ngayArr[6])}`;
   const now = new Date();
+  const t2  = ngayArr[0];
+  // Deadline là T6 tuần hiện tại trước tuần đăng ký
   const thu6 = new Date(t2);
-  thu6.setDate(t2.getDate() - 3); // T6 trước tuần đó
+  thu6.setDate(t2.getDate()-3);
   thu6.setHours(16,0,0,0);
-  const diff = Math.ceil((thu6 - now) / (1000*60*60*24));
-  const chipDL = document.getElementById("chipDeadline");
-  if (diff < 0) {
-    chipDL.textContent = "⛔ Hết hạn đăng ký";
-    chipDL.style.color = "#c0392b";
-  } else if (diff === 0) {
-    chipDL.textContent = "⏰ Hôm nay là deadline!";
-  } else {
-    chipDL.textContent = `⏰ Còn ${diff} ngày`;
-  }
+  const diff = Math.ceil((thu6-now)/(86400000));
+  const chip = document.getElementById("chipDeadline");
+  if (diff<0) chip.textContent="⛔ Hết hạn đăng ký";
+  else if(diff===0) chip.textContent="⏰ Hôm nay là deadline!";
+  else chip.textContent=`⏰ Còn ${diff} ngày`;
 }
 
 // ================================================================
-// RENDER TABS
-// ================================================================
 function renderTabs() {
-  const tabs = document.getElementById("ngayTabs");
-  tabs.innerHTML = ngayTuanSau.map((d, i) => {
-    const key = dateKey(d);
-    const data = dangKyData[key];
-    let cls = i === ngayHienTai ? " active" : "";
-    if (data.nghi) cls = " skip";
-    else if (data.trua.chon || data.chieu.chon) cls += " done";
-    const thu = d.getDay();
-    return `<div class="ngay-tab${cls}" onclick="doiNgay(${i})">${NGAY_SHORT[thu]}<br><small>${formatNgay(d)}</small></div>`;
+  document.getElementById("ngayTabs").innerHTML = ngayArr.map((d,i)=>{
+    const s = state[dk(d)];
+    let cls = i===ngayIdx?" active":"";
+    if(s.nghi) cls=" nghi-tab";
+    else if(s.trua.chon||s.chieu.chon) cls+=" done";
+    return `<div class="ngay-tab${cls}" onclick="doiNgay(${i})">${THU_SHORT[d.getDay()]}<br><small>${fmt(d)}</small></div>`;
   }).join("");
   capNhatProgress();
 }
 
 function capNhatProgress() {
-  const done = ngayTuanSau.filter((d,i) => {
-    const data = dangKyData[dateKey(d)];
-    return data.nghi || data.trua.chon || data.chieu.chon;
-  }).length;
-  document.getElementById("progressTxt").textContent = `${done}/7 ngày`;
-  document.getElementById("progressFill").style.width = `${(done/7)*100}%`;
-  capNhatTongKet();
+  const done = ngayArr.filter(d=>{ const s=state[dk(d)]; return s.nghi||s.trua.chon||s.chieu.chon; }).length;
+  document.getElementById("progTxt").textContent = `${done}/7 ngày`;
+  document.getElementById("progFill").style.width = `${(done/7)*100}%`;
+  renderTongKet();
 }
 
-// ================================================================
-// RENDER NỘI DUNG NGÀY
 // ================================================================
 function renderContent() {
-  const d = ngayTuanSau[ngayHienTai];
-  const key = dateKey(d);
-  const data = dangKyData[key];
+  const d   = ngayArr[ngayIdx];
+  const key = dk(d);
+  const s   = state[key];
   const thu = d.getDay();
-  const menu = menuTuan[key] || menuMau();
+  const menu= menuTuan[key] || MENU_MAU;
 
-  const html = `
-    <!-- NGHỈ TOGGLE -->
-    <div class="nghi-row">
-      <div class="nghi-label">🏥 Nghỉ ngày ${NGAY_NAMES[thu]} (${formatNgay(d)})</div>
-      <div class="toggle ${data.nghi ? 'on':''}" id="toggleNghi" onclick="toggleNghi('${key}')"></div>
+  document.getElementById("ngayContent").innerHTML = `
+    <!-- NGHỈ -->
+    <div class="toggle-row nghi-style">
+      <div class="toggle-lbl red">🏥 Nghỉ ngày ${THU_TEN[thu]} (${fmt(d)})</div>
+      <div class="tog ${s.nghi?"on-red":""}" onclick="toggleNghi('${key}')"></div>
     </div>
 
-    <div id="caContent" style="display:${data.nghi?'none':'block'}">
+    <div id="caWrap" style="display:${s.nghi?"none":"block"}">
       <!-- CA TRƯA -->
-      <div style="margin-bottom:16px;">
-        <div style="font-size:13px;font-weight:800;color:#2d7a3a;margin-bottom:8px;">🌤 Ca Trưa</div>
-        ${renderChonMon(key,'trua',menu.trua)}
+      <div class="toggle-row ca-style-trua">
+        <div class="toggle-lbl green">🌤 Ăn Ca Trưa?</div>
+        <div class="tog ${s.trua.chon?"on-green":""}" onclick="toggleCa('${key}','trua')"></div>
       </div>
+      <div id="truaWrap" style="display:${s.trua.chon?"block":"none"}">
+        <div class="mon-section">
+          <div class="mon-section-lbl">🥩 Chọn món mặn ca Trưa:</div>
+          <div class="mon-grid">
+            ${(menu.trua?.man||MENU_MAU.trua.man).map(m=>`
+              <div class="mon-item ${s.trua.man===m?"sel-trua":""}" onclick="chonMon('${key}','trua','${esc(m)}')">
+                <div class="mon-dot"></div>
+                <div class="mon-ten">${m}</div>
+              </div>`).join("")}
+          </div>
+          <div class="default-info" style="margin-top:10px;">
+            <div class="default-info-title">🍽 Các món còn lại (mặc định)</div>
+            <div class="default-item">🥬 Xào: ${menu.trua?.xao||MENU_MAU.trua.xao}</div>
+            <div class="default-item">🍜 Canh: ${menu.trua?.canh||MENU_MAU.trua.canh}</div>
+            <div class="default-item">🍊 Tráng miệng: Trái cây theo mùa</div>
+          </div>
+        </div>
+      </div>
+
       <!-- CA CHIỀU -->
-      <div>
-        <div style="font-size:13px;font-weight:800;color:#e67e22;margin-bottom:8px;">🌇 Ca Chiều</div>
-        ${renderChonMon(key,'chieu',menu.chieu)}
+      <div class="toggle-row ca-style-chieu" style="margin-top:10px;">
+        <div class="toggle-lbl orange">🌇 Ăn Ca Chiều?</div>
+        <div class="tog ${s.chieu.chon?"on-orange":""}" onclick="toggleCa('${key}','chieu')"></div>
+      </div>
+      <div id="chieuWrap" style="display:${s.chieu.chon?"block":"none"}">
+        <div class="mon-section">
+          <div class="mon-section-lbl">🥩 Chọn món mặn ca Chiều:</div>
+          <div class="mon-grid">
+            ${(menu.chieu?.man||MENU_MAU.chieu.man).map(m=>`
+              <div class="mon-item ${s.chieu.man===m?"sel-chieu":""}" onclick="chonMon('${key}','chieu','${esc(m)}')">
+                <div class="mon-dot"></div>
+                <div class="mon-ten">${m}</div>
+              </div>`).join("")}
+          </div>
+          <div class="default-info" style="margin-top:10px;">
+            <div class="default-info-title">🍽 Các món còn lại (mặc định)</div>
+            <div class="default-item">🥬 Xào: ${menu.chieu?.xao||MENU_MAU.chieu.xao}</div>
+            <div class="default-item">🍜 Canh: ${menu.chieu?.canh||MENU_MAU.chieu.canh}</div>
+            <div class="default-item">🍊 Tráng miệng: Trái cây theo mùa</div>
+          </div>
+        </div>
       </div>
     </div>
   `;
 
-  document.getElementById("ngayContent").innerHTML = html;
-  document.getElementById("btnPrev").disabled = ngayHienTai === 0;
-  document.getElementById("btnNext").disabled = ngayHienTai === 6;
-  document.getElementById("btnPrev").style.opacity = ngayHienTai === 0 ? ".4" : "1";
-  document.getElementById("btnNext").style.opacity = ngayHienTai === 6 ? ".4" : "1";
+  document.getElementById("btnPrev").disabled = ngayIdx===0;
+  document.getElementById("btnNext").disabled = ngayIdx===6;
 }
 
-function renderChonMon(key, ca, menu) {
-  const data = dangKyData[key][ca];
-  return `
-    <!-- CHỌN CA -->
-    <div style="background:#f8f9fa;border-radius:9px;padding:10px;margin-bottom:8px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-        <div style="font-size:12px;font-weight:700;color:#555;">Ăn ca này?</div>
-        <div class="toggle ${data.chon?'on':''}" onclick="toggleCa('${key}','${ca}')"></div>
-      </div>
-      <div id="monWrap_${key}_${ca}" style="display:${data.chon?'block':'none'}">
-        <!-- MÓN MẶN -->
-        <div class="mon-section">
-          <div class="mon-label">🥩 Món Mặn <span class="badge">Chọn 1</span></div>
-          <div class="mon-grid">
-            ${menu.man.map((m,i)=>`
-              <div class="mon-item ${data.man===m?'sel':''}" onclick="chonMon('${key}','${ca}','man','${esc(m)}')">
-                <div class="mon-dot"></div>
-                <div class="mon-ten">${m}</div>
-              </div>`).join("")}
-          </div>
-        </div>
-        <!-- MÓN XÀO -->
-        <div class="mon-section">
-          <div class="mon-label">🥬 Món Xào <span class="badge">Chọn 1</span></div>
-          <div class="mon-grid">
-            ${menu.xao.map((m,i)=>`
-              <div class="mon-item ${data.xao===m?'sel':''}" onclick="chonMon('${key}','${ca}','xao','${esc(m)}')">
-                <div class="mon-dot"></div>
-                <div class="mon-ten">${m}</div>
-              </div>`).join("")}
-          </div>
-        </div>
-        <!-- CANH -->
-        <div class="mon-section">
-          <div class="mon-label">🍜 Món Canh <span class="badge">Chọn 1</span></div>
-          <div class="mon-grid">
-            ${menu.canh.map((m,i)=>`
-              <div class="mon-item ${data.canh===m?'sel':''}" onclick="chonMon('${key}','${ca}','canh','${esc(m)}')">
-                <div class="mon-dot"></div>
-                <div class="mon-ten">${m}</div>
-              </div>`).join("")}
-          </div>
-        </div>
-        <!-- TRÁNG MIỆNG -->
-        <div class="trangmieng">
-          <div class="icon">🍊</div>
-          <div><div class="txt">Tráng Miệng</div><div class="sub">Trái cây theo mùa (mặc định)</div></div>
-          <div class="mon-chip">Tự động</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function menuMau() {
-  return {
-    trua: {
-      man: ["Sườn chiên giòn","Gà kho gừng"],
-      xao: ["Rau muống xào tỏi"],
-      canh: ["Canh chua cá","Canh bí đỏ"]
-    },
-    chieu: {
-      man: ["Cá kho tộ","Thịt bò xào"],
-      xao: ["Đậu que xào"],
-      canh: ["Canh rau ngót","Canh khổ qua"]
-    }
-  };
-}
-
-function esc(s){ return (s||"").replace(/'/g,"\\'").replace(/"/g,'\\"'); }
+function esc(s){ return (s||"").replace(/'/g,"\'"); }
 
 // ================================================================
-// ACTIONS
-// ================================================================
-function doiNgay(i) {
-  ngayHienTai = i;
-  renderTabs();
-  renderContent();
-}
+function doiNgay(i){ ngayIdx=i; renderTabs(); renderContent(); }
+function chuyenNgay(d){ const n=ngayIdx+d; if(n>=0&&n<7){ngayIdx=n;renderTabs();renderContent();} }
 
-function chuyenNgay(dir) {
-  const next = ngayHienTai + dir;
-  if (next >= 0 && next < 7) { ngayHienTai = next; renderTabs(); renderContent(); }
-}
-
-function toggleNghi(key) {
-  dangKyData[key].nghi = !dangKyData[key].nghi;
-  if (dangKyData[key].nghi) {
-    dangKyData[key].trua.chon = false;
-    dangKyData[key].chieu.chon = false;
-  }
+function toggleNghi(key){
+  state[key].nghi=!state[key].nghi;
+  if(state[key].nghi){ state[key].trua.chon=false; state[key].chieu.chon=false; }
   renderTabs(); renderContent();
 }
 
-function toggleCa(key, ca) {
-  dangKyData[key][ca].chon = !dangKyData[key][ca].chon;
+function toggleCa(key,ca){
+  state[key][ca].chon=!state[key][ca].chon;
   renderTabs(); renderContent();
 }
 
-function chonMon(key, ca, loai, ten) {
-  dangKyData[key][ca][loai] = ten;
-  renderContent();
-  renderTabs();
+function chonMon(key,ca,ten){
+  state[key][ca].man=ten;
+  renderContent(); renderTabs();
 }
 
 // ================================================================
-// TỔNG KẾT
-// ================================================================
-function capNhatTongKet() {
-  const html = ngayTuanSau.map((d,i) => {
-    const key = dateKey(d);
-    const data = dangKyData[key];
-    const thu = d.getDay();
-    let badge, detail;
-    if (data.nghi) {
-      badge = `<span class="td-badge badge-nghi">Nghỉ</span>`;
-      detail = "Không ăn ngày này";
+function renderTongKet(){
+  document.getElementById("tkList").innerHTML = ngayArr.map(d=>{
+    const key=dk(d); const s=state[key]; const thu=d.getDay();
+    let badge,detail;
+    if(s.nghi){
+      badge=`<span class="tk-badge badge-nghi">Nghỉ</span>`;
+      detail="Không ăn ngày này";
+    } else if(!s.trua.chon&&!s.chieu.chon){
+      badge=`<span class="tk-badge badge-none">Chưa chọn</span>`;
+      detail="Chưa đăng ký ca nào";
     } else {
-      const truaDone = data.trua.chon;
-      const chieuDone = data.chieu.chon;
-      if (!truaDone && !chieuDone) {
-        badge = `<span class="td-badge badge-skip">Chưa chọn</span>`;
-        detail = "Chưa đăng ký ca nào";
-      } else {
-        badge = `<span class="td-badge badge-ok">Đã đăng ký</span>`;
-        let lines = [];
-        if (truaDone) lines.push(`🌤 Trưa: ${data.trua.man||'?'} · ${data.trua.xao||'?'} · ${data.trua.canh||'?'}`);
-        if (chieuDone) lines.push(`🌇 Chiều: ${data.chieu.man||'?'} · ${data.chieu.xao||'?'} · ${data.chieu.canh||'?'}`);
-        detail = lines.join("<br>");
-      }
+      const n = (s.trua.chon?1:0)+(s.chieu.chon?1:0);
+      badge=`<span class="tk-badge ${n===2?"badge-ok":"badge-partial"}">${n===2?"Đủ 2 ca":"1 ca"}</span>`;
+      let lines=[];
+      if(s.trua.chon) lines.push(`🌤 Trưa: ${s.trua.man||"(chưa chọn món)"}`);
+      if(s.chieu.chon) lines.push(`🌇 Chiều: ${s.chieu.man||"(chưa chọn món)"}`);
+      detail=lines.join("<br>");
     }
-    return `<div class="tongket-day">
-      <div class="td-header">
-        <div class="td-name">${NGAY_NAMES[thu]} · ${formatNgay(d)}</div>
-        ${badge}
-      </div>
-      <div class="td-detail">${detail}</div>
+    return `<div class="tk-day">
+      <div class="tk-header"><div class="tk-name">${THU_TEN[thu]} · ${fmt(d)}</div>${badge}</div>
+      <div class="tk-detail">${detail}</div>
     </div>`;
   }).join("");
-  document.getElementById("tongketList").innerHTML = html;
 }
 
 // ================================================================
-// TẢI MENU TỪ SHEET
-// ================================================================
-function taiMenu() {
-  if (SHEET_URL === "https://script.google.com/macros/s/AKfycbxrgMfnpelos0qy1vmQXeDVJBYqwN2AVXNEIW4T6JOCE2LsQjRymwmNLNsaYmznY0B7/exec") return;
-  const t2Key = dateKey(ngayTuanSau[0]);
-  const script = document.createElement("script");
-  script.src = SHEET_URL + "?action=getMenuTuan&t2=" + t2Key + "&callback=nhanMenuTuan";
-  script.onerror = () => console.log("Dùng menu mẫu");
-  document.body.appendChild(script);
+function taiMenu(){
+  if(!SHEET_URL||SHEET_URL==="DAN_URL_O_DAY") return;
+  const t2k = dk(ngayArr[0]);
+  const s = document.createElement("script");
+  s.src = SHEET_URL+"?action=getMenuTuan&t2="+t2k+"&callback=nhanMenu";
+  s.onerror=()=>console.log("Dùng menu mẫu");
+  document.body.appendChild(s);
 }
-
-function nhanMenuTuan(data) {
-  if (data && data.menu) {
-    menuTuan = data.menu;
-    renderContent();
-  }
+function nhanMenu(data){
+  if(data&&data.menu){ menuTuan=data.menu; renderContent(); }
 }
 
 // ================================================================
-// GỬI ĐĂNG KÝ
-// ================================================================
-function guiDangKy() {
-  // Validate thông tin NV
+function guiDangKy(){
   const maNV  = document.getElementById("maNV").value.trim();
   const hoTen = document.getElementById("hoTen").value.trim();
   const boPhan= document.getElementById("boPhan").value;
-  let ok = true;
-  ["fMaNV","fHoTen","fBoPhan"].forEach(id => document.getElementById(id).classList.remove("err"));
-  if (!maNV)   { document.getElementById("fMaNV").classList.add("err"); ok=false; }
-  if (!hoTen)  { document.getElementById("fHoTen").classList.add("err"); ok=false; }
-  if (!boPhan) { document.getElementById("fBoPhan").classList.add("err"); ok=false; }
-  if (!ok) { alert("⚠️ Vui lòng điền đầy đủ thông tin nhân viên!"); return; }
+  let ok=true;
+  ["fMaNV","fHoTen","fBoPhan"].forEach(id=>document.getElementById(id).classList.remove("err"));
+  if(!maNV){document.getElementById("fMaNV").classList.add("err");ok=false;}
+  if(!hoTen){document.getElementById("fHoTen").classList.add("err");ok=false;}
+  if(!boPhan){document.getElementById("fBoPhan").classList.add("err");ok=false;}
+  if(!ok){alert("⚠️ Vui lòng điền đầy đủ thông tin nhân viên!");return;}
 
-  // Kiểm tra có đăng ký ngày nào chưa
-  const coDangKy = ngayTuanSau.some(d => {
-    const data = dangKyData[dateKey(d)];
-    return data.nghi || data.trua.chon || data.chieu.chon;
+  // Kiểm tra món mặn cho ca đã bật
+  let thieu=[];
+  ngayArr.forEach(d=>{
+    const s=state[dk(d)]; const thu=THU_TEN[d.getDay()];
+    if(!s.nghi){
+      if(s.trua.chon&&!s.trua.man) thieu.push(`${thu} - Ca Trưa`);
+      if(s.chieu.chon&&!s.chieu.man) thieu.push(`${thu} - Ca Chiều`);
+    }
   });
-  if (!coDangKy) { alert("⚠️ Vui lòng đăng ký ít nhất 1 ngày!"); return; }
+  if(thieu.length>0){alert("⚠️ Chưa chọn món mặn cho:\n"+thieu.join("\n"));return;}
 
-  const btn = document.getElementById("btnSubmit");
-  btn.disabled = true;
-  btn.innerHTML = `<span class="spin"></span> Đang gửi...`;
+  const coDK = ngayArr.some(d=>{const s=state[dk(d)];return s.nghi||s.trua.chon||s.chieu.chon;});
+  if(!coDK){alert("⚠️ Vui lòng đăng ký ít nhất 1 ngày!");return;}
 
-  const payload = {
-    action: "dangKyTuan",
-    maNV: maNV.toUpperCase(),
-    hoTen: chuanHoaTen(hoTen),
+  const btn=document.getElementById("btnSubmit");
+  btn.disabled=true;
+  btn.innerHTML=`<span class="spin"></span> Đang gửi...`;
+
+  const payload={
+    action:"dangKyTuan",
+    maNV:maNV.toUpperCase(),
+    hoTen:chuanHoaTen(hoTen),
     boPhan,
-    tuanBatDau: dateKey(ngayTuanSau[0]),
-    chiTiet: JSON.stringify(dangKyData),
-    callback: "nhanKetQua"
+    tuanBatDau:dk(ngayArr[0]),
+    chiTiet:JSON.stringify(state),
+    callback:"nhanKetQua"
   };
 
-  if (SHEET_URL === "https://script.google.com/macros/s/AKfycbxrgMfnpelos0qy1vmQXeDVJBYqwN2AVXNEIW4T6JOCE2LsQjRymwmNLNsaYmznY0B7/exec") {
-    // Demo mode
-    setTimeout(() => {
-      hienKQ(true, "Đăng ký thành công! 🎉",
-        `Mã NV: ${payload.maNV}\nHọ tên: ${payload.hoTen}\nTuần: ${formatNgay(ngayTuanSau[0])} → ${formatNgay(ngayTuanSau[6])}`);
-      btn.disabled = false;
-      btn.innerHTML = "✅ Xác Nhận Đăng Ký Cả Tuần";
-    }, 1500);
-    return;
-  }
-
-  const params = new URLSearchParams(payload);
-  const script = document.createElement("script");
-  script.id = "req";
-  script.src = SHEET_URL + "?" + params.toString();
-  script.onerror = () => {
+  const params=new URLSearchParams(payload);
+  const script=document.createElement("script");
+  script.id="req";
+  script.src=SHEET_URL+"?"+params.toString();
+  script.onerror=()=>{
     hienKQ(false,"Lỗi kết nối","Không thể gửi dữ liệu. Vui lòng thử lại.");
     btn.disabled=false; btn.innerHTML="✅ Xác Nhận Đăng Ký Cả Tuần";
   };
-  const old = document.getElementById("req");
-  if(old) old.remove();
+  const old=document.getElementById("req");
+  if(old)old.remove();
   document.body.appendChild(script);
-
-  setTimeout(() => {
+  setTimeout(()=>{
     if(btn.disabled){
-      hienKQ(false,"Hết thời gian chờ","Vui lòng thử lại.");
+      hienKQ(false,"Hết thời gian","Vui lòng thử lại.");
       btn.disabled=false; btn.innerHTML="✅ Xác Nhận Đăng Ký Cả Tuần";
     }
-  }, 12000);
+  },12000);
 }
 
-function nhanKetQua(data) {
-  const btn = document.getElementById("btnSubmit");
+function nhanKetQua(data){
+  const btn=document.getElementById("btnSubmit");
   btn.disabled=false; btn.innerHTML="✅ Xác Nhận Đăng Ký Cả Tuần";
-  hienKQ(data.success, data.success?"Đăng ký thành công! 🎉":"Không thể đăng ký", data.message);
+  hienKQ(data.success,data.success?"Đăng ký thành công! 🎉":"Không thể đăng ký",data.message);
 }
 
-function hienKQ(ok, title, detail) {
-  const box = document.getElementById("result");
-  box.className = "result " + (ok?"ok":"err");
-  box.style.display = "block";
-  document.getElementById("rIcon").textContent = ok?"✅":"❌";
-  document.getElementById("rTitle").textContent = title;
-  document.getElementById("rDetail").textContent = detail;
+function hienKQ(ok,title,detail){
+  const box=document.getElementById("result");
+  box.className="result "+(ok?"ok":"err");
+  box.style.display="block";
+  document.getElementById("rIcon").textContent=ok?"✅":"❌";
+  document.getElementById("rTitle").textContent=title;
+  document.getElementById("rDetail").textContent=detail;
   box.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-// ================================================================
-// HELPERS
-// ================================================================
-function chuanHoaTen(ten) {
-  return ten.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
-}
-
-function resetAll() {
-  location.reload();
+function chuanHoaTen(ten){
+  return ten.toLowerCase().trim().replace(/\b\w/g,c=>c.toUpperCase());
 }
 </script>
 </body>
