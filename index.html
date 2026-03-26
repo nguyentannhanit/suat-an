@@ -217,7 +217,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
 </div>
 
 <script>
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxrgMfnpelos0qy1vmQXeDVJBYqwN2AVXNEIW4T6JOCE2LsQjRymwmNLNsaYmznY0B7/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzYg1E8ON4wINPC5rROiyAdLElB1cL-WHType-bSHtGzpxZQ6WjIynxTKh52_vTQ9A/exec";
 
 const THU_TEN   = ["Chủ Nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
 const THU_SHORT = ["CN","T2","T3","T4","T5","T6","T7"];
@@ -440,7 +440,7 @@ function renderTongKet(){
 
 // ================================================================
 function taiMenu(){
-  if(!SHEET_URL||SHEET_URL==="https://script.google.com/macros/s/AKfycbzYg1E8ON4wINPC5rROiyAdLElB1cL-WHType-bSHtGzpxZQ6WjIynxTKh52_vTQ9A/exec") return;
+  if(!SHEET_URL||SHEET_URL==="DAN_URL_O_DAY") return;
   const t2k = dk(ngayArr[0]);
   const s = document.createElement("script");
   s.src = SHEET_URL+"?action=getMenuTuan&t2="+t2k+"&callback=nhanMenu";
@@ -463,12 +463,12 @@ function guiDangKy(){
   if(!boPhan){document.getElementById("fBoPhan").classList.add("err");ok=false;}
   if(!ok){alert("⚠️ Vui lòng điền đầy đủ thông tin nhân viên!");return;}
 
-  // Kiểm tra món mặn cho ca đã bật (bỏ qua nếu ăn chay)
+  // Kiểm tra chọn món cho ca đã bật
   let thieu=[];
   ngayArr.forEach(d=>{
     const s=state[dk(d)]; const thu=THU_TEN[d.getDay()];
-    if(!s.nghi&&!s.chay){
-      if(s.trua.chon&&!s.trua.man) thieu.push(`${thu} - Ca Trưa`);
+    if(!s.nghi){
+      if(s.trua.chon&&!s.trua.man)  thieu.push(`${thu} - Ca Trưa`);
       if(s.chieu.chon&&!s.chieu.man) thieu.push(`${thu} - Ca Chiều`);
     }
   });
