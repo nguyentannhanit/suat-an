@@ -133,6 +133,13 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
 .btn-reset{margin-top:12px;padding:8px 20px;border:2px solid var(--red);border-radius:8px;background:transparent;color:var(--red);font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .2s;}
 .btn-reset:hover{background:var(--red);color:#fff;}
 .footer{text-align:center;padding:16px 0 0;color:var(--sub);font-size:12px;}
+.chay-row{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#f1f8e9;border:2px solid #aed581;border-radius:10px;margin-bottom:12px;cursor:pointer;}
+.chay-box{width:22px;height:22px;border:2px solid #7cb342;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff;flex-shrink:0;transition:all .2s;}
+.chay-box.checked{background:#7cb342;border-color:#7cb342;}
+.chay-box.checked::after{content:'✓';color:#fff;font-size:13px;font-weight:900;}
+.chay-lbl{font-size:13px;font-weight:800;color:#33691e;}
+.chay-sub{font-size:11px;color:#689f38;margin-top:1px;}
+.chay-badge{margin-left:auto;background:#7cb342;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;}
 @media(max-width:380px){.frow{grid-template-columns:1fr;}.btn-row{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -168,13 +175,13 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;paddi
           <option value="">-- Chọn --</option>
           <option>HCNS</option><option>Kế hoạch</option><option>IT</option>
           <option>Kế toán</option><option>Đóng gói</option><option>Mài</option>
-          <option>Hoàn thiện</option><option>Tạo hình</option>
-          <option>Gốm mộc</option><option>Gốm phối liệu</option>
-          <option>Vật tư</option><option>Bảo Vệ</option>
-          <option>QC</option><option>Tạp vụ</option>
-          <option>Bảo trì</option><option>Kho TP</option>
-          <option>Khuôn</option><option>Thí nghiệm</option>
-          <option>Phụ trách Xưởng</option><option>Khác</option>
+          <option>Hoàn thiện</option><option>Tạo hình</option><option>Khác</option>
+          <option>Gốm mộc</option><option>Gốm phối liệu</option><option>Khác</option>
+          <option>Vật tư</option><option>Bảo Vệ</option><option>Khác</option>
+          <option>QC</option><option>Tạp vụ</option><option>Khác</option>
+          <option>Bảo trì</option><option>Kho TP</option><option>Khác</option>
+          <option>Khuôn</option><option>Thí nghiệm</option><option>Khác</option>
+          <option>Phụ trách Xưởng</option>
         </select></div>
       </div>
     </div>
@@ -248,7 +255,7 @@ function tinhTuanSau() {
     d.setDate(t2.getDate()+i);
     ngayArr.push(d);
     const k = dk(d);
-    if (!state[k]) state[k] = { nghi:false, trua:{man:"",chon:false}, chieu:{man:"",chon:false} };
+    if (!state[k]) state[k] = { nghi:false, chay:false, trua:{man:"",chon:false}, chieu:{man:"",chon:false} };
   }
 }
 
@@ -302,6 +309,16 @@ function renderContent() {
     <div class="toggle-row nghi-style">
       <div class="toggle-lbl red">🏥 Nghỉ ngày ${THU_TEN[thu]} (${fmt(d)})</div>
       <div class="tog ${s.nghi?"on-red":""}" onclick="toggleNghi('${key}')"></div>
+    </div>
+
+    <!-- ĂN CHAY -->
+    <div class="chay-row" id="chayRow" onclick="toggleChay('${key}')" style="display:${s.nghi?"none":"flex"}">
+      <div class="chay-box ${s.chay?"checked":""}"></div>
+      <div>
+        <div class="chay-lbl">🌿 Ăn chay trường</div>
+        <div class="chay-sub">Tất cả món sẽ là đồ chay</div>
+      </div>
+      ${s.chay?'<span class="chay-badge">Đang bật</span>':''}
     </div>
 
     <div id="caWrap" style="display:${s.nghi?"none":"block"}">
@@ -376,6 +393,19 @@ function toggleCa(key,ca){
   renderTabs(); renderContent();
 }
 
+function toggleChay(key){
+  state[key].chay=!state[key].chay;
+  // Nếu bật chay thì xoá món mặn đã chọn
+  if(state[key].chay){
+    state[key].trua.man="Suất chay";
+    state[key].chieu.man="Suất chay";
+  } else {
+    state[key].trua.man="";
+    state[key].chieu.man="";
+  }
+  renderTabs(); renderContent();
+}
+
 function chonMon(key,ca,ten){
   state[key][ca].man=ten;
   renderContent(); renderTabs();
@@ -396,8 +426,9 @@ function renderTongKet(){
       const n = (s.trua.chon?1:0)+(s.chieu.chon?1:0);
       badge=`<span class="tk-badge ${n===2?"badge-ok":"badge-partial"}">${n===2?"Đủ 2 ca":"1 ca"}</span>`;
       let lines=[];
-      if(s.trua.chon) lines.push(`🌤 Trưa: ${s.trua.man||"(chưa chọn món)"}`);
-      if(s.chieu.chon) lines.push(`🌇 Chiều: ${s.chieu.man||"(chưa chọn món)"}`);
+      const chayTag = s.chay?' 🌿':'';
+      if(s.trua.chon) lines.push(`🌤 Trưa: ${s.chay?"Suất chay":(s.trua.man||"(chưa chọn món)")}${chayTag}`);
+      if(s.chieu.chon) lines.push(`🌇 Chiều: ${s.chay?"Suất chay":(s.chieu.man||"(chưa chọn món)")}${chayTag}`);
       detail=lines.join("<br>");
     }
     return `<div class="tk-day">
@@ -409,7 +440,7 @@ function renderTongKet(){
 
 // ================================================================
 function taiMenu(){
-  if(!SHEET_URL||SHEET_URL==="DAN_URL_O_DAY") return;
+  if(!SHEET_URL||SHEET_URL==="https://script.google.com/macros/s/AKfycbzYg1E8ON4wINPC5rROiyAdLElB1cL-WHType-bSHtGzpxZQ6WjIynxTKh52_vTQ9A/exec") return;
   const t2k = dk(ngayArr[0]);
   const s = document.createElement("script");
   s.src = SHEET_URL+"?action=getMenuTuan&t2="+t2k+"&callback=nhanMenu";
@@ -432,11 +463,11 @@ function guiDangKy(){
   if(!boPhan){document.getElementById("fBoPhan").classList.add("err");ok=false;}
   if(!ok){alert("⚠️ Vui lòng điền đầy đủ thông tin nhân viên!");return;}
 
-  // Kiểm tra món mặn cho ca đã bật
+  // Kiểm tra món mặn cho ca đã bật (bỏ qua nếu ăn chay)
   let thieu=[];
   ngayArr.forEach(d=>{
     const s=state[dk(d)]; const thu=THU_TEN[d.getDay()];
-    if(!s.nghi){
+    if(!s.nghi&&!s.chay){
       if(s.trua.chon&&!s.trua.man) thieu.push(`${thu} - Ca Trưa`);
       if(s.chieu.chon&&!s.chieu.man) thieu.push(`${thu} - Ca Chiều`);
     }
